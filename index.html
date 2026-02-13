@@ -1,0 +1,1559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Data Analyst Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gold: #F5A623;
+            --dark-gold: #E89B0C;
+            --light-bg: #FFF9F0;
+            --white: #FFFFFF;
+            --text-dark: #2C2C2C;
+            --text-gray: #6B6B6B;
+            --text-light: #9B9B9B;
+            --accent-orange: #FF8C42;
+            --card-shadow: rgba(245, 166, 35, 0.15);
+            --gradient-start: #FFB84D;
+            --gradient-end: #F5A623;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sora', sans-serif;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            touch-action: pan-y;
+            -ms-touch-action: pan-y;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 30px;
+        }
+
+        /* Sidebar Profile */
+        .sidebar {
+            position: sticky;
+            top: 40px;
+            height: fit-content;
+        }
+
+        .profile-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 20px 60px var(--card-shadow);
+            animation: slideInLeft 0.6s ease-out;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--white);
+            box-shadow: 0 10px 30px rgba(245, 166, 35, 0.3);
+        }
+
+        .profile-name {
+            font-size: 20px;
+            font-weight: 700;
+            text-align: center;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .profile-title {
+            font-size: 12px;
+            color: var(--text-gray);
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .info-grid {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .info-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: var(--light-bg);
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-gold);
+        }
+
+        .info-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-gray);
+        }
+
+        .info-value {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            margin-top: 25px;
+        }
+
+        .education-item {
+            background: var(--light-bg);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-left: 4px solid var(--primary-gold);
+        }
+
+        .education-icon {
+            font-size: 32px;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        .education-details {
+            flex: 1;
+        }
+
+        .education-degree {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 3px;
+        }
+
+        .education-field {
+            font-size: 12px;
+            color: var(--text-gray);
+        }
+
+        .education-year {
+            font-size: 11px;
+            color: var(--primary-gold);
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        .education-minor {
+            font-size: 11px;
+            color: var(--text-gray);
+            font-style: italic;
+            margin-top: 3px;
+        }
+
+        .skill-category {
+            margin-bottom: 18px;
+        }
+
+        .skill-category-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .skill-tag {
+            background: var(--light-bg);
+            color: var(--text-dark);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            border: 1px solid rgba(245, 166, 35, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: linear-gradient(135deg, var(--primary-gold), var(--accent-orange));
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(245, 166, 35, 0.3);
+        }
+
+        .skill-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .skill-name {
+            font-size: 13px;
+            color: var(--text-gray);
+        }
+
+        .skill-percentage {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary-gold);
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 6px;
+            background: var(--light-bg);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 5px;
+        }
+
+        .skill-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-gold), var(--accent-orange));
+            border-radius: 3px;
+            transition: width 1s ease-out;
+        }
+
+        .extra-skills {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .extra-skills li {
+            padding: 8px 0;
+            color: var(--text-gray);
+            font-size: 13px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .extra-skills li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary-gold);
+            font-weight: 700;
+        }
+
+        .download-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--accent-orange));
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 10px 30px rgba(245, 166, 35, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(245, 166, 35, 0.5);
+        }
+
+        /* Main Content */
+        .main-content {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 60px;
+            box-shadow: 0 20px 60px var(--card-shadow);
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 40px;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(245, 166, 35, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-greeting {
+            font-size: 18px;
+            color: var(--text-gray);
+            margin-bottom: 10px;
+        }
+
+        .hero-name {
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .hero-role {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-gold), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+        }
+
+        .hero-description {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-gray);
+            margin-bottom: 30px;
+            max-width: 650px;
+        }
+
+        .hire-btn {
+            padding: 15px 40px;
+            background: var(--primary-gold);
+            color: var(--white);
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 30px rgba(245, 166, 35, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .hire-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(245, 166, 35, 0.5);
+        }
+
+        .hero-image {
+            width: 280px;
+            height: 320px;
+            background: linear-gradient(135deg, var(--light-bg), var(--white));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 20px 60px rgba(245, 166, 35, 0.2);
+        }
+
+        .floating-icons {
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .icon-button {
+            width: 50px;
+            height: 50px;
+            background: var(--white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon-button:hover {
+            background: var(--primary-gold);
+            color: var(--white);
+            transform: scale(1.1);
+        }
+
+        /* Services Section */
+        .services-section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 60px var(--card-shadow);
+            margin-bottom: 30px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            font-size: 15px;
+            color: var(--text-gray);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: var(--light-bg);
+            border-radius: 16px;
+            padding: 35px 25px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-gold), var(--accent-orange));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(245, 166, 35, 0.3);
+        }
+
+        .service-card:hover .service-icon,
+        .service-card:hover .service-title,
+        .service-card:hover .service-description {
+            color: var(--white);
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .service-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .service-description {
+            font-size: 13px;
+            color: var(--text-gray);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+        }
+
+        /* Contact Section in Sidebar */
+        .contact-info-container {
+            animation: slideInLeft 0.6s ease-out;
+        }
+
+        /* Contact Modal */
+        .contact-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .contact-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 50px;
+            max-width: 700px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideUp 0.4s ease;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .modal-close:hover {
+            background: var(--light-bg);
+            color: var(--primary-gold);
+            transform: rotate(90deg);
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .modal-header h2 {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .modal-header p {
+            font-size: 15px;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        .modal-contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .modal-contact-card {
+            background: var(--light-bg);
+            border-radius: 16px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-left: 4px solid var(--primary-gold);
+        }
+
+        .modal-contact-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 30px rgba(245, 166, 35, 0.3);
+            background: linear-gradient(135deg, rgba(245, 166, 35, 0.1), rgba(255, 140, 66, 0.1));
+        }
+
+        .modal-contact-icon {
+            font-size: 48px;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .modal-contact-info {
+            flex: 1;
+        }
+
+        .modal-contact-label {
+            font-size: 11px;
+            color: var(--text-gray);
+            margin-bottom: 5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .modal-contact-value {
+            font-size: 16px;
+            color: var(--text-dark);
+            font-weight: 600;
+            word-break: break-word;
+        }
+
+        .modal-social-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 35px;
+            padding-top: 30px;
+            border-top: 2px solid var(--light-bg);
+        }
+
+        .modal-social-link {
+            width: 55px;
+            height: 55px;
+            background: var(--light-bg);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .modal-social-link:hover {
+            background: linear-gradient(135deg, var(--primary-gold), var(--accent-orange));
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 30px rgba(245, 166, 35, 0.4);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Portfolio Item Styles */
+        .portfolio-item {
+            background: var(--light-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-gold);
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(245, 166, 35, 0.2);
+        }
+
+        .portfolio-item-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .portfolio-item-description {
+            font-size: 14px;
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .portfolio-item-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary-gold);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-item-link:hover {
+            color: var(--accent-orange);
+            gap: 12px;
+        }
+
+        .portfolio-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .portfolio-tag {
+            background: var(--white);
+            color: var(--text-dark);
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                padding: 35px 25px;
+                width: 95%;
+            }
+
+            .modal-header h2 {
+                font-size: 26px;
+            }
+
+            .modal-contact-card {
+                padding: 20px;
+            }
+
+            .modal-contact-icon {
+                font-size: 36px;
+                min-width: 50px;
+            }
+        }
+
+        .contact-mini-card {
+            background: var(--light-bg);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-left: 3px solid var(--primary-gold);
+        }
+
+        .contact-mini-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(245, 166, 35, 0.3);
+            background: linear-gradient(135deg, rgba(245, 166, 35, 0.1), rgba(255, 140, 66, 0.1));
+        }
+
+        .contact-mini-icon {
+            font-size: 28px;
+            min-width: 35px;
+            text-align: center;
+        }
+
+        .contact-mini-details {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .contact-mini-label {
+            font-size: 10px;
+            color: var(--text-gray);
+            margin-bottom: 3px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-mini-value {
+            font-size: 12px;
+            color: var(--text-dark);
+            font-weight: 600;
+            word-break: break-word;
+            line-height: 1.3;
+        }
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .container {
+                grid-template-columns: 280px 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 968px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: relative;
+                top: 0;
+            }
+
+            .hero-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-image {
+                margin: 0 auto;
+            }
+
+            .hero-description {
+                margin: 0 auto 30px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 40px 30px;
+            }
+
+            .hero-name,
+            .hero-role {
+                font-size: 36px;
+            }
+
+            .services-section,
+            .price-plans-section {
+                padding: 40px 25px;
+            }
+
+            .section-header h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Profile -->
+        <div class="sidebar">
+            <div class="profile-card">
+                <div class="profile-image">NG</div>
+                <div class="profile-name">Narase Gowda</div>
+                <div class="profile-title">Data Analyst | Data Journalist | Aspiring Financial Engineer</div>
+
+                <div class="info-grid" style="margin-top: 25px;">
+                    <div class="info-item">
+                        <span class="info-label">Age:</span>
+                        <span class="info-value">26</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Experience:</span>
+                        <span class="info-value">2+ Years</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Availability:</span>
+                        <span class="info-value">Available</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Location:</span>
+                        <span class="info-value">Bengaluru, KA</span>
+                    </div>
+                </div>
+
+                <div class="section-title">Education</div>
+                <div class="education-item">
+                    <div class="education-icon">🎓</div>
+                    <div class="education-details">
+                        <div class="education-degree">Bachelor of Commerce</div>
+                        <div class="education-field">Bangalore University, Bangalore KA</div>
+                        <div class="education-year">Aug 2021 | GPA 8.32</div>
+                        <div class="education-minor">Minor: Finance, Accounts & Taxation</div>
+                    </div>
+                </div>
+
+                <div class="section-title">Technical Skills</div>
+
+                <div class="skill-category">
+                    <div class="skill-category-title">Operating Systems</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Windows</span>
+                        <span class="skill-tag">Linux</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-category-title">Python Libraries</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Pandas</span>
+                        <span class="skill-tag">NumPy</span>
+                        <span class="skill-tag">Matplotlib</span>
+                        <span class="skill-tag">Seaborn</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-category-title">Data Visualization & BI</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Power BI</span>
+                        <span class="skill-tag">Tableau</span>
+                        <span class="skill-tag">Metabase</span>
+                        <span class="skill-tag">Excel</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-category-title">MIS & Reporting</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">SFA</span>
+                        <span class="skill-tag">DMS</span>
+                        <span class="skill-tag">MIS Dashboards</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-category-title">ERP System</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Dynamics 365</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-category-title">Databases</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">MongoDB</span>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <div class="skill-category-title">Development Tools</div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">VS Code</span>
+                        <span class="skill-tag">PyCharm</span>
+                        <span class="skill-tag">Jupyter</span>
+                    </div>
+                </div>
+
+                <div class="section-title">Soft Skills</div>
+                <ul class="extra-skills">
+                    <li>Analytical Thinking</li>
+                    <li>Team Collaboration</li>
+                    <li>Communication Skills</li>
+                    <li>Data Accuracy & Quality Focus</li>
+                    <li>Time Management</li>
+                    <li>Adaptability & Quick Learning</li>
+                </ul>
+
+                <button class="download-btn">
+                    <span>⬇</span> DOWNLOAD CV
+                </button>
+
+                <!-- Contact Information (Hidden by default) -->
+                <div class="contact-info-container" id="contactInfo" style="display: none;">
+                    <div class="section-title" style="margin-top: 30px;">Contact Info</div>
+
+                    <div class="contact-mini-card">
+                        <div class="contact-mini-icon">📧</div>
+                        <div class="contact-mini-details">
+                            <div class="contact-mini-label">EMAIL</div>
+                            <div class="contact-mini-value">yourname@example.com</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-mini-card">
+                        <div class="contact-mini-icon">📱</div>
+                        <div class="contact-mini-details">
+                            <div class="contact-mini-label">PHONE</div>
+                            <div class="contact-mini-value">+1 (555) 123-4567</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-mini-card">
+                        <div class="contact-mini-icon">📍</div>
+                        <div class="contact-mini-details">
+                            <div class="contact-mini-label">LOCATION</div>
+                            <div class="contact-mini-value">Bengaluru, KA</div>
+                        </div>
+                    </div>
+
+                    <div class="contact-mini-card">
+                        <div class="contact-mini-icon">💼</div>
+                        <div class="contact-mini-details">
+                            <div class="contact-mini-label">LINKEDIN</div>
+                            <div class="contact-mini-value">linkedin.com/in/yourprofile</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Hero Section -->
+            <div class="hero-section">
+                <div class="hero-content">
+                    <div class="hero-greeting">Hello, I'm</div>
+                    <div class="hero-name">Narase Gowda</div>
+                    <div class="hero-role">Data Analyst</div>
+                    <p class="hero-description">
+                        MIS / Data Analyst with experience in SFA and DMS data reporting, sales and distribution analysis, and MIS operations. Skilled in Excel, MySQL, SQL queries, data cleaning, validation, and backend data management. Experienced in preparing daily, weekly, and monthly MIS reports, dashboards, and performance summaries. Familiar with BI reporting tools, cloud databases, and data integration workflows. Educational background in Finance and Accounts with strong understanding of financial data, reporting, and reconciliation. Detail-oriented professional focused on accuracy and data-driven decision support.
+                    </p>
+                    <button class="hire-btn">
+                        HIRE ME <span>→</span>
+                    </button>
+                </div>
+                <div class="hero-image">📊</div>
+
+                <div class="floating-icons">
+                    <div class="icon-button">🔍</div>
+                    <div class="icon-button">📈</div>
+                    <div class="icon-button">💡</div>
+                    <div class="icon-button">✏️</div>
+                </div>
+            </div>
+
+            <!-- Coding Profiles, Projects & Certifications Section -->
+            <div class="services-section">
+                <div class="section-header">
+                    <h2>Portfolio Highlights</h2>
+                    <p>Explore my coding profiles, personal projects, and professional certifications
+                    that demonstrate my technical expertise and commitment to continuous learning.</p>
+                </div>
+
+                <div class="services-grid">
+                    <div class="service-card" onclick="openCodingProfiles()">
+                        <div class="service-icon">💻</div>
+                        <div class="service-title">Coding Profiles</div>
+                        <div class="service-description">
+                            Active on LeetCode, HackerRank, and GitHub. Regular problem-solving practice and code contributions.
+                        </div>
+                    </div>
+
+                    <div class="service-card" style="opacity: 0.6; cursor: not-allowed;">
+                        <div class="service-icon">🚀</div>
+                        <div class="service-title">My Projects</div>
+                        <div class="service-description">
+                            Coming Soon - Data analysis projects and dashboards currently in development.
+                        </div>
+                    </div>
+
+                    <div class="service-card" onclick="openCertifications()">
+                        <div class="service-icon">🎓</div>
+                        <div class="service-title">Certifications</div>
+                        <div class="service-description">
+                            Professional certifications in Data Analysis, SQL, Python, Power BI, and Business Intelligence.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <!-- Contact Modal -->
+    <div class="contact-modal" id="contactModal">
+        <div class="modal-content">
+            <span class="modal-close" id="modalClose">&times;</span>
+
+            <div class="modal-header">
+                <h2>Get In Touch</h2>
+                <p>Let's connect! Feel free to reach out through any of the channels below.</p>
+            </div>
+
+            <div class="modal-contact-grid">
+                <div class="modal-contact-card">
+                    <div class="modal-contact-icon">📧</div>
+                    <div class="modal-contact-info">
+                        <div class="modal-contact-label">Email</div>
+                        <div class="modal-contact-value">ngowda2030@gmail.com</div>
+                    </div>
+                </div>
+
+                <div class="modal-contact-card">
+                    <div class="modal-contact-icon">📱</div>
+                    <div class="modal-contact-info">
+                        <div class="modal-contact-label">Phone</div>
+                        <div class="modal-contact-value">+91 96861 50070</div>
+                    </div>
+                </div>
+
+                <div class="modal-contact-card">
+                    <div class="modal-contact-icon">📍</div>
+                    <div class="modal-contact-info">
+                        <div class="modal-contact-label">Location</div>
+                        <div class="modal-contact-value">Bengaluru, Karnataka, India</div>
+                    </div>
+                </div>
+
+                <div class="modal-contact-card">
+                    <div class="modal-contact-icon">💼</div>
+                    <div class="modal-contact-info">
+                        <div class="modal-contact-label">LinkedIn</div>
+                        <div class="modal-contact-value">linkedin.com/in/ngowda2030</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-social-links">
+                <a href="https://www.linkedin.com/in/ngowda2030" target="_blank" class="modal-social-link" title="LinkedIn">💼</a>
+                <a href="https://github.com/ngowda25" target="_blank" class="modal-social-link" title="GitHub">💻</a>
+                <a href="mailto:ngowda2030@gmail.com" class="modal-social-link" title="Email">📧</a>
+                <a href="tel:+919686150070" class="modal-social-link" title="Phone">📱</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Coding Profiles Modal -->
+    <div class="contact-modal" id="codingProfilesModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeCodingProfiles()">&times;</span>
+
+            <div class="modal-header">
+                <h2>💻 Coding Profiles</h2>
+                <p>My active coding profiles and competitive programming platforms</p>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-item-title">GitHub</div>
+                <div class="portfolio-item-description">
+                    Repository of data analysis projects, Python scripts, and automation tools
+                </div>
+                <a href="https://github.com/ngowda25" target="_blank" class="portfolio-item-link">
+                    View Profile →
+                </a>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-item-title">W3Schools</div>
+                <div class="portfolio-item-description">
+                    W3Schools profile showcasing web development and programming skills
+                </div>
+                <a href="https://www.w3profile.com/ngowda/" target="_blank" class="portfolio-item-link">
+                    View Profile →
+                </a>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-item-title">HackerRank</div>
+                <div class="portfolio-item-description">
+                    Active problem solver with certifications in SQL and Python
+                </div>
+                <a href="https://www.hackerrank.com/profile/ngowda2030" target="_blank" class="portfolio-item-link">
+                    View Profile →
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects Modal -->
+    <div class="contact-modal" id="projectsModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeProjects()">&times;</span>
+
+            <div class="modal-header">
+                <h2>🚀 My Projects</h2>
+                <p>Data analysis and visualization projects showcasing real-world applications</p>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-item-title">Sales Dashboard & Analytics</div>
+                <div class="portfolio-item-description">
+                    Interactive Power BI dashboard tracking sales performance, revenue trends, and regional analysis with automated daily updates
+                </div>
+                <div class="portfolio-tags">
+                    <span class="portfolio-tag">Power BI</span>
+                    <span class="portfolio-tag">SQL</span>
+                    <span class="portfolio-tag">Excel</span>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-item-title">MIS Reporting Automation</div>
+                <div class="portfolio-item-description">
+                    Python-based automation system for generating daily, weekly, and monthly MIS reports with email distribution
+                </div>
+                <div class="portfolio-tags">
+                    <span class="portfolio-tag">Python</span>
+                    <span class="portfolio-tag">Pandas</span>
+                    <span class="portfolio-tag">MySQL</span>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-item-title">Customer Segmentation Analysis</div>
+                <div class="portfolio-item-description">
+                    Data-driven customer segmentation using clustering algorithms to identify high-value customer groups
+                </div>
+                <div class="portfolio-tags">
+                    <span class="portfolio-tag">Python</span>
+                    <span class="portfolio-tag">Machine Learning</span>
+                    <span class="portfolio-tag">Tableau</span>
+                </div>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-item-title">Financial Data Dashboard</div>
+                <div class="portfolio-item-description">
+                    Comprehensive financial reporting dashboard with KPI tracking, budget variance analysis, and forecasting
+                </div>
+                <div class="portfolio-tags">
+                    <span class="portfolio-tag">Excel</span>
+                    <span class="portfolio-tag">Power BI</span>
+                    <span class="portfolio-tag">SQL</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Certifications Modal -->
+    <div class="contact-modal" id="certificationsModal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeCertifications()">&times;</span>
+
+            <div class="modal-header">
+                <h2>🎓 Certifications</h2>
+                <p>Professional certifications and completed courses</p>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-item-title">Statistics & Machine Learning for Data Science</div>
+                <div class="portfolio-item-description">
+                    Successfully completed comprehensive course in Statistics and Machine Learning from Learnbay
+                </div>
+                <div class="portfolio-tags">
+                    <span class="portfolio-tag">Learnbay</span>
+                    <span class="portfolio-tag">Aug 2025</span>
+                    <span class="portfolio-tag">ID: 552c6uh</span>
+                </div>
+                <a href="https://invoice-lb.s3.us-east-2.amazonaws.com/certificate/Narase-GowdaMon-Aug-18-2025-13-48-01-GMT-0000--Coordinated-Universal-Time--552c6uh.pdf" target="_blank" class="portfolio-item-link" style="margin-top: 12px; display: inline-flex;">
+                    View Certificate →
+                </a>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-item-title">LearnVista Skills Network Certification (IBM)</div>
+                <div class="portfolio-item-description">
+                    Professional certification from LearnVista Skills Network powered by IBM
+                </div>
+                <div class="portfolio-tags">
+                    <span class="portfolio-tag">LearnVista</span>
+                    <span class="portfolio-tag">IBM</span>
+                    <span class="portfolio-tag">2025</span>
+                </div>
+                <a href="https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fcourses%2Elearnvista%2Eskillsnetwork%2Esite%2Fcertificates%2Fa853433843b647779edabe146875fba2&urlhash=BXmW&isSdui=true" target="_blank" class="portfolio-item-link" style="margin-top: 12px; display: inline-flex;">
+                    View Certificate →
+                </a>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-item-title">LearnVista Skills Network Certification (IBM)</div>
+                <div class="portfolio-item-description">
+                    Advanced professional certification from LearnVista Skills Network powered by IBM
+                </div>
+                <div class="portfolio-tags">
+                    <span class="portfolio-tag">LearnVista</span>
+                    <span class="portfolio-tag">IBM</span>
+                    <span class="portfolio-tag">2025</span>
+                </div>
+                <a href="https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fcourses%2Elearnvista%2Eskillsnetwork%2Esite%2Fcertificates%2Fcb399c8dc5a143588f6a77869ad72250&urlhash=WdRI&isSdui=true" target="_blank" class="portfolio-item-link" style="margin-top: 12px; display: inline-flex;">
+                    View Certificate →
+                </a>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-item-title">HackerRank Certification</div>
+                <div class="portfolio-item-description">
+                    Programming and problem-solving certification from HackerRank
+                </div>
+                <div class="portfolio-tags">
+                    <span class="portfolio-tag">HackerRank</span>
+                    <span class="portfolio-tag">2025</span>
+                </div>
+                <a href="https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fwww%2Ehackerrank%2Ecom%2Fcertificates%2Fiframe%2F9cf66b2c5e77&urlhash=98Ak&isSdui=true" target="_blank" class="portfolio-item-link" style="margin-top: 12px; display: inline-flex;">
+                    View Certificate →
+                </a>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-item-title">Kaggle Certification</div>
+                <div class="portfolio-item-description">
+                    Data Science and Machine Learning certification from Kaggle
+                </div>
+                <div class="portfolio-tags">
+                    <span class="portfolio-tag">Kaggle</span>
+                    <span class="portfolio-tag">2025</span>
+                </div>
+                <a href="https://www.linkedin.com/redir/redirect/?url=https%3A%2F%2Fwww%2Ekaggle%2Ecom%2Fcertification%2Fbadges%2Fngowdalh%2F105&urlhash=Ofwk&isSdui=true" target="_blank" class="portfolio-item-link" style="margin-top: 12px; display: inline-flex;">
+                    View Certificate →
+                </a>
+            </div>
+
+            <div class="portfolio-item">
+                <div class="portfolio-item-title">Python Programming Certificate</div>
+                <div class="portfolio-item-description">
+                    Python programming certification demonstrating proficiency in Python development
+                </div>
+                <div class="portfolio-tags">
+                    <span class="portfolio-tag">Python</span>
+                    <span class="portfolio-tag">2025</span>
+                </div>
+                <a href="https://drive.google.com/file/d/1s-N9q6dYEL69Rw_UP9fXox1rY7k2ZIiL/view?usp=drivesdk" target="_blank" class="portfolio-item-link" style="margin-top: 12px; display: inline-flex;">
+                    View Certificate →
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Prevent zoom on double tap and pinch
+        document.addEventListener('gesturestart', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('gesturechange', function (e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('gestureend', function (e) {
+            e.preventDefault();
+        });
+
+        // Prevent double-tap zoom
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (e) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                e.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
+        // Hire Me button click handler - Open modal
+        const hireMeBtn = document.querySelector('.hire-btn');
+        const contactModal = document.getElementById('contactModal');
+        const modalClose = document.getElementById('modalClose');
+        const contactInfo = document.getElementById('contactInfo');
+
+        hireMeBtn.addEventListener('click', function() {
+            contactModal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        });
+
+        // Close modal on X button click
+        modalClose.addEventListener('click', function() {
+            contactModal.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        });
+
+        // Close modal when clicking outside the content
+        contactModal.addEventListener('click', function(e) {
+            if (e.target === contactModal) {
+                contactModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && contactModal.classList.contains('active')) {
+                contactModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Portfolio Modal Functions
+        function openCodingProfiles() {
+            document.getElementById('codingProfilesModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCodingProfiles() {
+            document.getElementById('codingProfilesModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function openProjects() {
+            document.getElementById('projectsModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeProjects() {
+            document.getElementById('projectsModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function openCertifications() {
+            document.getElementById('certificationsModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCertifications() {
+            document.getElementById('certificationsModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close portfolio modals when clicking outside
+        document.querySelectorAll('.contact-modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+
+        // Floating icon buttons functionality
+        const iconButtons = document.querySelectorAll('.icon-button');
+
+        iconButtons.forEach((button, index) => {
+            button.addEventListener('click', function() {
+                const icon = this.textContent;
+
+                switch(index) {
+                    case 0: // Search icon
+                        // Scroll to projects section
+                        document.querySelector('.services-section').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        break;
+                    case 1: // Chart icon
+                        // Open contact modal
+                        contactModal.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                        break;
+                    case 2: // Bulb icon
+                        // Scroll to top
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        break;
+                    case 3: // Edit icon
+                        // Download CV (you can add actual download link)
+                        alert('Download CV functionality - Add your CV link here');
+                        break;
+                }
+
+                // Visual feedback
+                this.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+            });
+        });
+
+        // Animate skill bars on load (removed - no longer using skill bars)
+
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add floating animation to icons
+        const floatingIcons = document.querySelectorAll('.icon-button');
+        floatingIcons.forEach((icon, index) => {
+            icon.style.animation = `float 3s ease-in-out ${index * 0.3}s infinite`;
+        });
+
+        // Hover effects for service cards
+        const serviceCards = document.querySelectorAll('.service-card');
+        serviceCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+    </script>
+</body>
+</html>
