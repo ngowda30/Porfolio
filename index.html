@@ -33,6 +33,125 @@
             overflow-x: hidden;
             touch-action: pan-y;
             -ms-touch-action: pan-y;
+            padding-top: 80px;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .navbar-logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-gold), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+        }
+
+        .navbar-menu {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .navbar-menu li {
+            position: relative;
+        }
+
+        .navbar-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .navbar-menu a:hover {
+            color: var(--primary-gold);
+        }
+
+        .navbar-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--accent-orange));
+            transition: width 0.3s ease;
+        }
+
+        .navbar-menu a:hover::after {
+            width: 100%;
+        }
+
+        .navbar-menu a.active {
+            color: var(--primary-gold);
+        }
+
+        .navbar-menu a.active::after {
+            width: 100%;
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-gold);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(7px, 7px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .container {
@@ -47,7 +166,7 @@
         /* Sidebar Profile */
         .sidebar {
             position: sticky;
-            top: 40px;
+            top: 120px;
             height: fit-content;
         }
 
@@ -752,26 +871,6 @@
             font-weight: 600;
         }
 
-        @media (max-width: 768px) {
-            .modal-content {
-                padding: 35px 25px;
-                width: 95%;
-            }
-
-            .modal-header h2 {
-                font-size: 26px;
-            }
-
-            .modal-contact-card {
-                padding: 20px;
-            }
-
-            .modal-contact-icon {
-                font-size: 36px;
-                min-width: 50px;
-            }
-        }
-
         .contact-mini-card {
             background: var(--light-bg);
             border-radius: 12px;
@@ -863,6 +962,36 @@
         }
 
         @media (max-width: 968px) {
+            .navbar-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                gap: 0;
+                padding: 20px 0;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                transition: left 0.3s ease;
+            }
+
+            .navbar-menu.active {
+                left: 0;
+            }
+
+            .navbar-menu li {
+                padding: 15px 40px;
+                border-bottom: 1px solid var(--light-bg);
+            }
+
+            .navbar-menu a::after {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
             .container {
                 grid-template-columns: 1fr;
             }
@@ -900,18 +1029,53 @@
                 font-size: 36px;
             }
 
-            .services-section,
-            .price-plans-section {
+            .services-section {
                 padding: 40px 25px;
             }
 
             .section-header h2 {
                 font-size: 28px;
             }
+
+            .modal-content {
+                padding: 35px 25px;
+                width: 95%;
+            }
+
+            .modal-header h2 {
+                font-size: 26px;
+            }
+
+            .modal-contact-card {
+                padding: 20px;
+            }
+
+            .modal-contact-icon {
+                font-size: 36px;
+                min-width: 50px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-logo">NG</div>
+            <ul class="navbar-menu" id="navbarMenu">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#blog">Blog</a></li>
+            </ul>
+            <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
         <!-- Sidebar Profile -->
         <div class="sidebar">
@@ -1070,7 +1234,7 @@
         <!-- Main Content -->
         <div class="main-content">
             <!-- Hero Section -->
-            <div class="hero-section">
+            <div class="hero-section" id="home">
                 <div class="hero-content">
                     <div class="hero-greeting">Hello, I'm</div>
                     <div class="hero-name">Narase Gowda</div>
@@ -1093,7 +1257,7 @@
             </div>
 
             <!-- Coding Profiles, Projects & Certifications Section -->
-            <div class="services-section">
+            <div class="services-section" id="portfolio">
                 <div class="section-header">
                     <h2>Portfolio Highlights</h2>
                     <p>Explore my coding profiles, personal projects, and professional certifications
@@ -1126,8 +1290,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 
@@ -1409,6 +1571,67 @@
             lastTouchEnd = now;
         }, false);
 
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navbarMenu = document.getElementById('navbarMenu');
+
+        mobileMenuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navbarMenu.classList.toggle('active');
+        });
+
+        // Navigation Active State and Smooth Scroll
+        const navLinks = document.querySelectorAll('.navbar-menu a');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                navLinks.forEach(l => l.classList.remove('active'));
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Close mobile menu if open
+                mobileMenuToggle.classList.remove('active');
+                navbarMenu.classList.remove('active');
+                
+                // Smooth scroll to section
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    const offsetTop = targetSection.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Update active nav link on scroll
+        window.addEventListener('scroll', function() {
+            let current = '';
+            const sections = document.querySelectorAll('section, .hero-section, .services-section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
         // Hire Me button click handler - Open modal
         const hireMeBtn = document.querySelector('.hire-btn');
         const contactModal = document.getElementById('contactModal');
@@ -1417,13 +1640,13 @@
 
         hireMeBtn.addEventListener('click', function() {
             contactModal.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            document.body.style.overflow = 'hidden';
         });
 
         // Close modal on X button click
         modalClose.addEventListener('click', function() {
             contactModal.classList.remove('active');
-            document.body.style.overflow = 'auto'; // Restore scrolling
+            document.body.style.overflow = 'auto';
         });
 
         // Close modal when clicking outside the content
@@ -1492,36 +1715,29 @@
 
                 switch(index) {
                     case 0: // Search icon
-                        // Scroll to projects section
                         document.querySelector('.services-section').scrollIntoView({
                             behavior: 'smooth',
                             block: 'start'
                         });
                         break;
                     case 1: // Chart icon
-                        // Open contact modal
                         contactModal.classList.add('active');
                         document.body.style.overflow = 'hidden';
                         break;
                     case 2: // Bulb icon
-                        // Scroll to top
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                         break;
                     case 3: // Edit icon
-                        // Download CV (you can add actual download link)
                         alert('Download CV functionality - Add your CV link here');
                         break;
                 }
 
-                // Visual feedback
                 this.style.transform = 'scale(1.2)';
                 setTimeout(() => {
                     this.style.transform = 'scale(1)';
                 }, 200);
             });
         });
-
-        // Animate skill bars on load (removed - no longer using skill bars)
 
         // Add smooth scroll behavior
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1556,6 +1772,4 @@
 
     </script>
 </body>
-
 </html>
-
