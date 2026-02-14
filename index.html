@@ -1066,7 +1066,7 @@
                 <li><a href="#home" class="active">Home</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#blog">Blog</a></li>
+                <li><a href="blog.html" target="_blank">Blog</a></li>
             </ul>
             <div class="mobile-menu-toggle" id="mobileMenuToggle">
                 <span></span>
@@ -1087,7 +1087,7 @@
                 <div class="info-grid" style="margin-top: 25px;">
                     <div class="info-item">
                         <span class="info-label">Email:</span>
-                        <span class="info-value">ngowda2030@gmail.com</span>
+                        <span class="info-value"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d5bbb2baa2b1b4e7e5e6e595b2b8b4bcb9fbb6bab8">[email&#160;protected]</a></span>
                     </div>
                     <div class="info-item">
                         <span class="info-label">Contact:</span>
@@ -1543,7 +1543,7 @@
         </div>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Prevent zoom on double tap and pinch
         document.addEventListener('gesturestart', function (e) {
             e.preventDefault();
@@ -1581,6 +1581,14 @@
         
         navLinks.forEach(link => {
             link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                
+                // Check if this is an external link (like blog.html) or section link
+                if (href && !href.startsWith('#')) {
+                    // Let external links work normally
+                    return;
+                }
+                
                 e.preventDefault();
                 
                 // Remove active class from all links
@@ -1594,7 +1602,7 @@
                 navbarMenu.classList.remove('active');
                 
                 // Smooth scroll to section
-                const targetId = this.getAttribute('href');
+                const targetId = href;
                 const targetSection = document.querySelector(targetId);
                 
                 if (targetSection) {
@@ -1750,9 +1758,4 @@
 
         // Add floating animation to icons
         const floatingIcons = document.querySelectorAll('.icon-button');
-        floatingIcons.forEach((icon, index) => {
-            icon.style.animation = `float 3s ease-in-out ${index * 0.3}s infinite`;
-        });
-
-        // Hover effects for service cards
-        const serviceCards = document.querySelecto
+        floatin
