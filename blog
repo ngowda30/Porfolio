@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SQL Zero to Hero - Narase Gowda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gold: #F5A623;
+            --dark-gold: #E89B0C;
+            --light-bg: #FFF9F0;
+            --white: #FFFFFF;
+            --text-dark: #2C2C2C;
+            --text-gray: #6B6B6B;
+            --text-light: #9B9B9B;
+            --accent-orange: #FF8C42;
+            --card-shadow: rgba(245, 166, 35, 0.15);
+            --gradient-start: #FFB84D;
+            --gradient-end: #F5A623;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sora', sans-serif;
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-top: 80px;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .navbar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .navbar-logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-gold), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .back-btn {
+            padding: 10px 25px;
+            background: linear-gradient(135deg, var(--primary-gold), var(--accent-orange));
+            color: var(--white);
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 166, 35, 0.4);
+        }
+
+        /* Blog Container */
+        .blog-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px 60px;
+        }
+
+        .blog-header {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 50px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px var(--card-shadow);
+            text-align: center;
+        }
+
+        .blog-title {
+            font-size: 48px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-gold), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .blog-meta {
+            color: var(--text-gray);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .blog-meta span {
+            margin: 0 15px;
+        }
+
+        .blog-intro {
+            font-size: 18px;
+            color: var(--text-gray);
+            line-height: 1.8;
+            margin-top: 20px;
+        }
+
+        .blog-content {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 60px var(--card-shadow);
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid var(--primary-gold);
+        }
+
+        .section-title:first-child {
+            margin-top: 0;
+        }
+
+        .subsection-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-gold);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .blog-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: var(--text-gray);
+        }
+
+        .code-block {
+            background: #2C2C2C;
+            color: #F8F8F2;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Space Mono', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            border-left: 4px solid var(--primary-gold);
+        }
+
+        .keyword {
+            color: #FF79C6;
+            font-weight: 600;
+        }
+
+        .function {
+            color: #50FA7B;
+        }
+
+        .comment {
+            color: #6272A4;
+            font-style: italic;
+        }
+
+        .highlight-box {
+            background: var(--light-bg);
+            border-left: 4px solid var(--primary-gold);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .highlight-box strong {
+            color: var(--primary-gold);
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .feature-list li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            color: var(--text-gray);
+        }
+
+        .feature-list li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary-gold);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .concept-card {
+            background: linear-gradient(135deg, rgba(245, 166, 35, 0.05), rgba(255, 140, 66, 0.05));
+            border: 2px solid var(--primary-gold);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+
+        .concept-card h4 {
+            color: var(--primary-gold);
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: var(--white);
+        }
+
+        table th {
+            background: linear-gradient(135deg, var(--primary-gold), var(--accent-orange));
+            color: var(--white);
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        table tr:hover {
+            background: var(--light-bg);
+        }
+
+        @media (max-width: 768px) {
+            .blog-title {
+                font-size: 32px;
+            }
+
+            .blog-header,
+            .blog-content {
+                padding: 30px 20px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .subsection-title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">NG</a>
+            <a href="index.html" class="back-btn">← Back to Home</a>
+        </div>
+    </nav>
+
+    <!-- Blog Container -->
+    <div class="blog-container">
+        <!-- Blog Header -->
+        <div class="blog-header">
+            <h1 class="blog-title">SQL Zero to Hero</h1>
+            <div class="blog-meta">
+                <span>By Narase Gowda</span>
+                <span>|</span>
+                <span>Data Analyst</span>
+                <span>|</span>
+                <span>February 2026</span>
+            </div>
+            <p class="blog-intro">
+                Master SQL from the ground up! This comprehensive guide will take you from absolute beginner to SQL hero, covering everything from basic queries to advanced database operations. Whether you're starting your data journey or looking to sharpen your skills, this guide has you covered.
+            </p>
+        </div>
+
+        <!-- Blog Content -->
+        <div class="blog-content">
+            <h2 class="section-title">Introduction to SQL</h2>
+            <p>
+                SQL (Structured Query Language) is the standard language for managing and manipulating relational databases. It's an essential skill for data analysts, database administrators, and anyone working with data. SQL allows you to create, read, update, and delete data in databases, making it a fundamental tool in the data professional's toolkit.
+            </p>
+            <p>
+                In this guide, we'll explore the core SQL concepts organized into seven main categories: ALIAS, GROUP BY, ORDER BY, JOINS, FUNCTIONS, and WHERE clauses. Each section builds upon the previous one, creating a comprehensive learning path.
+            </p>
+
+            <h2 class="section-title">1. ALIAS - Simplifying Your Queries with AS</h2>
+            <p>
+                An alias is a temporary name given to a table or column for the duration of a query. Using the <code>AS</code> keyword makes your SQL queries more readable and helps when working with complex joins or calculations.
+            </p>
+
+            <div class="concept-card">
+                <h4>Basic Syntax</h4>
+                <div class="code-block"><span class="keyword">SELECT</span> column_name <span class="keyword">AS</span> alias_name
+<span class="keyword">FROM</span> table_name;</div>
+            </div>
+
+            <div class="highlight-box">
+                <strong>Why Use Aliases?</strong>
+                <ul class="feature-list">
+                    <li>Make column names more descriptive and readable</li>
+                    <li>Shorten long table names in complex queries</li>
+                    <li>Create cleaner output for reports and dashboards</li>
+                    <li>Essential when working with multiple tables in joins</li>
+                </ul>
+            </div>
+
+            <h2 class="section-title">2. GROUP BY - Organizing Your Data</h2>
+            <p>
+                The <code>GROUP BY</code> clause is used to group rows that have the same values in specified columns. It's commonly used with aggregate functions (COUNT, MAX, MIN, SUM, AVG) to perform calculations on each group of data.
+            </p>
+
+            <h3 class="subsection-title">GROUP BY with Column</h3>
+            <div class="code-block"><span class="keyword">SELECT</span> column_name(s)
+<span class="keyword">FROM</span> table_name
+<span class="keyword">WHERE</span> condition
+<span class="keyword">GROUP BY</span> column_name(s)
+<span class="keyword">ORDER BY</span> column_name(s);</div>
+
+            <h3 class="subsection-title">HAVING Clause</h3>
+            <p>
+                The <code>HAVING</code> clause was added to SQL because the <code>WHERE</code> keyword cannot be used with aggregate functions. It allows you to filter groups based on aggregate calculations.
+            </p>
+
+            <div class="code-block"><span class="keyword">SELECT</span> column_name(s)
+<span class="keyword">FROM</span> table_name
+<span class="keyword">WHERE</span> condition
+<span class="keyword">GROUP BY</span> column_name(s)
+<span class="keyword">HAVING</span> condition
+<span class="keyword">ORDER BY</span> column_name(s);</div>
+
+            <div class="highlight-box">
+                <strong>WHERE vs HAVING:</strong> Use <code>WHERE</code> to filter rows before grouping, and <code>HAVING</code> to filter groups after aggregation.
+            </div>
+
+            <h2 class="section-title">3. ORDER BY - Sorting Your Results</h2>
+            <p>
+                The <code>ORDER BY</code> keyword sorts the result set in ascending or descending order. By default, it sorts in ascending order. Use <code>DESC</code> to sort in descending order.
+            </p>
+
+            <div class="code-block"><span class="keyword">SELECT</span> column1, column2, ...
+<span class="keyword">FROM</span> table_name
+<span class="keyword">ORDER BY</span> column1, column2, ... <span class="keyword">ASC</span>|<span class="keyword">DESC</span>;</div>
+
+            <div class="concept-card">
+                <h4>Sorting Options</h4>
+                <ul class="feature-list">
+                    <li><strong>ASC</strong> - Ascending order (default, A to Z, 0 to 9)</li>
+                    <li><strong>DESC</strong> - Descending order (Z to A, 9 to 0)</li>
+                    <li>Can sort by multiple columns simultaneously</li>
+                    <li>Each column can have its own sorting direction</li>
+                </ul>
+            </div>
+
+            <h2 class="section-title">4. JOINS - Connecting Tables Together</h2>
+            <p>
+                SQL joins are used to combine rows from two or more tables based on a related column between them. Understanding joins is crucial for working with relational databases where data is spread across multiple tables.
+            </p>
+
+            <h3 class="subsection-title">INNER JOIN</h3>
+            <p>
+                Returns only the records that have matching values in both tables. This is the most commonly used join type.
+            </p>
+            <div class="code-block"><span class="keyword">SELECT</span> column_name(s)
+<span class="keyword">FROM</span> table1
+<span class="keyword">INNER JOIN</span> table2
+<span class="keyword">ON</span> table1.column_name = table2.column_name;</div>
+
+            <h3 class="subsection-title">LEFT JOIN</h3>
+            <p>
+                Returns all records from the left table, and the matched records from the right table. If there's no match, NULL values are returned for the right table's columns.
+            </p>
+            <div class="code-block"><span class="keyword">SELECT</span> column_name(s)
+<span class="keyword">FROM</span> table1
+<span class="keyword">LEFT JOIN</span> table2
+<span class="keyword">ON</span> table1.column_name = table2.column_name;</div>
+
+            <h3 class="subsection-title">RIGHT JOIN</h3>
+            <p>
+                Returns all records from the right table, and the matched records from the left table. The opposite of LEFT JOIN.
+            </p>
+            <div class="code-block"><span class="keyword">SELECT</span> column_name(s)
+<span class="keyword">FROM</span> table1
+<span class="keyword">RIGHT JOIN</span> table2
+<span class="keyword">ON</span> table1.column_name = table2.column_name;</div>
+
+            <h3 class="subsection-title">FULL OUTER JOIN</h3>
+            <p>
+                Returns all records when there is a match in either left or right table. Combines the results of both LEFT and RIGHT joins.
+            </p>
+            <div class="code-block"><span class="keyword">SELECT</span> column_name(s)
+<span class="keyword">FROM</span> table1
+<span class="keyword">FULL OUTER JOIN</span> table2
+<span class="keyword">ON</span> table1.column_name = table2.column_name
+<span class="keyword">WHERE</span> condition;</div>
+
+            <h2 class="section-title">5. FUNCTIONS - Powerful Data Operations</h2>
+            <p>
+                SQL aggregate functions perform calculations on multiple rows and return a single value. These are essential for data analysis and reporting.
+            </p>
+
+            <h3 class="subsection-title">AVG() - Average Function</h3>
+            <div class="code-block"><span class="keyword">SELECT</span> <span class="function">AVG</span>(column_name)
+<span class="keyword">FROM</span> table_name
+<span class="keyword">WHERE</span> condition;</div>
+            <p>Calculates the average value of a numeric column.</p>
+
+            <h3 class="subsection-title">SUM() - Sum Function</h3>
+            <div class="code-block"><span class="keyword">SELECT</span> <span class="function">SUM</span>(column_name)
+<span class="keyword">FROM</span> table_name
+<span class="keyword">WHERE</span> condition;</div>
+            <p>Returns the total sum of a numeric column.</p>
+
+            <h3 class="subsection-title">COUNT() - Count Function</h3>
+            <div class="code-block"><span class="keyword">SELECT</span> <span class="function">COUNT</span>(ProductID)
+<span class="keyword">FROM</span> Products;</div>
+            <p>Counts the number of rows that match specified criteria.</p>
+
+            <h3 class="subsection-title">MIN() - Minimum Function</h3>
+            <div class="code-block"><span class="keyword">SELECT</span> <span class="function">MIN</span>(column_name)
+<span class="keyword">FROM</span> table_name
+<span class="keyword">WHERE</span> condition;</div>
+            <p>Returns the smallest value in a column.</p>
+
+            <h3 class="subsection-title">MAX() - Maximum Function</h3>
+            <div class="code-block"><span class="keyword">SELECT</span> <span class="function">MAX</span>(column_name)
+<span class="keyword">FROM</span> table_name
+<span class="keyword">WHERE</span> condition;</div>
+            <p>Returns the largest value in a column.</p>
+
+            <h2 class="section-title">6. WHERE Clause - Filtering Your Data</h2>
+            <p>
+                The <code>WHERE</code> clause is used to filter records and extract only those that meet specified conditions. It's one of the most fundamental aspects of SQL querying.
+            </p>
+
+            <h3 class="subsection-title">LIKE - Pattern Matching</h3>
+            <div class="code-block"><span class="keyword">SELECT</span> column1, column2, ...
+<span class="keyword">FROM</span> table_name
+<span class="keyword">WHERE</span> columnN <span class="keyword">LIKE</span> pattern;</div>
+            <p>Used for pattern matching with wildcards (% for multiple characters, _ for single character).</p>
+
+            <h3 class="subsection-title">IN - Multiple Values</h3>
+            <div class="code-block"><span class="keyword">SELECT</span> column_name(s)
+<span class="keyword">FROM</span> table_name
+<span class="keyword">WHERE</span> column_name <span class="keyword">IN</span> (value1, value2, ...);</div>
+            <p>Allows you to specify multiple values in a WHERE clause.</p>
+
+            <h3 class="subsection-title">BETWEEN - Range Selection</h3>
+            <div class="code-block"><span class="keyword">SELECT</span> column_name
+<span class="keyword">FROM</span> table_name
+<span class="keyword">WHERE</span> column_name <span class="keyword">BETWEEN</span> value1 <span class="keyword">AND</span> value2;</div>
+            <p>Selects values within a given range (inclusive).</p>
+
+            <h3 class="subsection-title">ANY - Subquery Comparison</h3>
+            <div class="code-block"><span class="keyword">SELECT</span> column_name(s)
+<span class="keyword">FROM</span> table_name
+<span class="keyword">WHERE</span> column_name operator <span class="keyword">ANY</span>
+    (<span class="keyword">SELECT</span> column_name
+     <span class="keyword">FROM</span> table_name);</div>
+            <p>Compares a value to any value in a subquery result.</p>
+
+            <h3 class="subsection-title">EXISTS - Subquery Testing</h3>
+            <div class="code-block"><span class="keyword">SELECT</span> column_name(s)
+<span class="keyword">FROM</span> table_name
+<span class="keyword">WHERE EXISTS</span>
+    (<span class="keyword">SELECT</span> column_name
+     <span class="keyword">FROM</span> table_name
+     <span class="keyword">WHERE</span> condition);</div>
+            <p>Tests for the existence of any record in a subquery.</p>
+
+            <h2 class="section-title">7. Logical Operators - Combining Conditions</h2>
+
+            <h3 class="subsection-title">ALL - Compare to All Values</h3>
+            <div class="code-block"><span class="keyword">SELECT</span> <span class="keyword">ALL</span> column_name(s)
+<span class="keyword">FROM</span> table_name
+<span class="keyword">WHERE</span> condition;</div>
+
+            <h3 class="subsection-title">AND - Multiple Conditions</h3>
+            <div class="code-block"><span class="keyword">SELECT</span> column1, column2, ...
+<span class="keyword">FROM</span> table_name
+<span class="keyword">WHERE</span> condition1 <span class="keyword">AND</span> condition2 <span class="keyword">AND</span> condition3...;</div>
+            <p>All conditions must be true.</p>
+
+            <h3 class="subsection-title">OR - Alternative Conditions</h3>
+            <div class="code-block"><span class="keyword">SELECT</span> column1, column2, ...
+<span class="keyword">FROM</span> table_name
+<span class="keyword">WHERE</span> condition1 <span class="keyword">OR</span> condition2 <span class="keyword">OR</span> condition3...;</div>
+            <p>At least one condition must be true.</p>
+
+            <h3 class="subsection-title">NOT - Negation</h3>
+            <div class="code-block"><span class="keyword">SELECT</span> column1, column2, ...
+<span class="keyword">FROM</span> table_name
+<span class="keyword">WHERE NOT</span> condition;</div>
+            <p>Reverses the result of a condition.</p>
+
+            <h2 class="section-title">Best Practices for Writing SQL Queries</h2>
+            <div class="highlight-box">
+                <ul class="feature-list">
+                    <li><strong>Use meaningful aliases</strong> to make your queries self-documenting</li>
+                    <li><strong>Format your SQL</strong> with proper indentation for readability</li>
+                    <li><strong>Always specify column names</strong> instead of using SELECT *</li>
+                    <li><strong>Use WHERE before GROUP BY</strong> to filter data early</li>
+                    <li><strong>Index your columns</strong> that are frequently used in WHERE, JOIN, and ORDER BY</li>
+                    <li><strong>Test with LIMIT</strong> when working with large datasets</li>
+                    <li><strong>Comment your complex queries</strong> to explain the business logic</li>
+                </ul>
+            </div>
+
+            <h2 class="section-title">Conclusion</h2>
+            <p>
+                Congratulations! You've now covered the essential SQL concepts that form the foundation of database querying. From basic aliases to complex joins and aggregate functions, you have the tools to start writing powerful SQL queries.
+            </p>
+            <p>
+                Remember, mastering SQL is a journey. The more you practice writing queries, the more comfortable you'll become with these concepts. Start with simple queries and gradually work your way up to more complex data manipulations.
+            </p>
+            <p>
+                As a data analyst, SQL will be one of your most valuable skills. It's the language that allows you to unlock insights from data, create meaningful reports, and drive business decisions. Keep practicing, stay curious, and happy querying!
+            </p>
+
+            <div class="concept-card">
+                <h4>Next Steps in Your SQL Journey</h4>
+                <ul class="feature-list">
+                    <li>Practice with real datasets (Kaggle, public databases)</li>
+                    <li>Learn about database normalization and design</li>
+                    <li>Explore window functions and CTEs (Common Table Expressions)</li>
+                    <li>Study database performance optimization</li>
+                    <li>Get certified (consider certifications from Oracle, Microsoft, or others)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scroll for back button
+        document.querySelector('.navbar-logo').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
